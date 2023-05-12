@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: CI/CD
 
 on:
   push:
@@ -30,3 +30,34 @@ jobs:
         context: .
         push: true
         tags: shuelzin/helloworld-page:latest
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install SSH key
+      uses: webfactory/ssh-agent@v0.5.0
+      with:
+        ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
+
+    - name: Install Docker if not present
+      run: |
+        if ! command -v docker &> /dev/null
+        then
+          sudo apt-get update
+          sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+          sudo apt-get update
+          sudo apt-get install -y docker-ce
+        fi
+
+    - name: Deploy to VM
+      run: |
+        ssh -o StrictHostKeyChecking=no teste-ascan@137.117.164.200 'docker stop ascan-helloworld || true && docker rm ascan-helloworld || true'
+        ssh -o StrictHostKeyChecking=no teste-ascan@137.117.164.200 'docker pull shuelzin/helloworld-page:latest && docker run -d -p 80:80 --name ascan-helloworld shuelzin/helloworld-page:latest'
+
