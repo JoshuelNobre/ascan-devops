@@ -71,6 +71,9 @@ jobs:
             sudo apt-get install -y docker-ce
           fi
         '
+    - name: Add user to docker group on VM
+      run: |
+        ssh -o StrictHostKeyChecking=no teste-ascan@137.117.164.200 'sudo usermod -aG docker $USER'
 
     - name: Deploy to VM
       run: |
