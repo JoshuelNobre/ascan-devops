@@ -73,10 +73,10 @@ jobs:
         '
     - name: Add user to docker group on VM
       run: |
-        ssh -o StrictHostKeyChecking=no teste-ascan@137.117.164.200 'sudo usermod -aG docker $USER'
+        ssh -o StrictHostKeyChecking=no teste-ascan@13.94.235.127 'sudo usermod -aG docker $USER'
 
     - name: Deploy to VM
       run: |
-        ssh -o StrictHostKeyChecking=no teste-ascan@137.117.164.200 'docker stop ascan-helloworld || true && docker rm ascan-helloworld || true'
-        ssh -o StrictHostKeyChecking=no teste-ascan@137.117.164.200 'docker pull shuelzin/helloworld-page:latest && docker run -d -p 80:80 --name ascan-helloworld shuelzin/helloworld-page:latest'
+        ssh -o StrictHostKeyChecking=no teste-ascan@13.94.235.127 'docker stop ascan-helloworld || true && docker rm ascan-helloworld || true'
+        ssh -o StrictHostKeyChecking=no teste-ascan@13.94.235.127 'docker pull shuelzin/helloworld-page:latest && docker run -d -p 80:80 --name ascan-helloworld shuelzin/helloworld-page:latest'
 
