@@ -60,7 +60,7 @@ jobs:
 
     - name: Install Docker on VM if not present
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ VM_NAME_IP }} '
+        ssh -o StrictHostKeyChecking=no ${{ secrets.VM_NAME_IP }} '
           if ! command -v docker &> /dev/null
           then
             sudo apt-get update
@@ -73,10 +73,10 @@ jobs:
         '
     - name: Add user to docker group on VM
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ VM_NAME_IP }} 'sudo usermod -aG docker $USER'
+        ssh -o StrictHostKeyChecking=no ${{ secrets.VM_NAME_IP }} 'sudo usermod -aG docker $USER'
 
     - name: Deploy to VM
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ VM_NAME_IP }} 'docker stop ascan-helloworld || true && docker rm ascan-helloworld || true'
-        ssh -o StrictHostKeyChecking=no ${{ VM_NAME_IP }} 'docker pull shuelzin/helloworld-page:latest && docker run -d -p 80:80 --name ascan-helloworld shuelzin/helloworld-page:latest'
+        ssh -o StrictHostKeyChecking=no ${{ secrets.VM_NAME_IP }} 'docker stop ascan-helloworld || true && docker rm ascan-helloworld || true'
+        ssh -o StrictHostKeyChecking=no ${{ secrets.VM_NAME_IP }} 'docker pull shuelzin/helloworld-page:latest && docker run -d -p 80:80 --name ascan-helloworld shuelzin/helloworld-page:latest'
 
