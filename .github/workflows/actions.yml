@@ -79,4 +79,9 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.VM_NAME_IP }} 'docker stop ascan-helloworld || true && docker rm ascan-helloworld || true'
         ssh -o StrictHostKeyChecking=no ${{ secrets.VM_NAME_IP }} 'docker pull shuelzin/helloworld-page:latest && docker run -d -p 80:80 --restart=always --name ascan-helloworld shuelzin/helloworld-page:latest'
+    
+    - name: Run nginx-prometheus-exporter on VM
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.VM_NAME_IP }} 'docker stop nginx-exporter || true && docker rm nginx-exporter || true'
+        ssh -o StrictHostKeyChecking=no ${{ secrets.VM_NAME_IP }} 'docker pull nginx/nginx-prometheus-exporter:0.8.0 && docker run -d -p 9113:9113 --restart=always --name nginx-exporter nginx/nginx-prometheus-exporter:0.8.0 -nginx.scrape-uri=http://localhost:8080/nginx_status'
 
