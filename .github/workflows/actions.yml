@@ -78,5 +78,5 @@ jobs:
     - name: Deploy to VM
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.VM_NAME_IP }} 'docker stop ascan-helloworld || true && docker rm ascan-helloworld || true'
-        ssh -o StrictHostKeyChecking=no ${{ secrets.VM_NAME_IP }} 'docker pull shuelzin/helloworld-page:latest && docker run -d -p 80:80 --name ascan-helloworld shuelzin/helloworld-page:latest'
+        ssh -o StrictHostKeyChecking=no ${{ secrets.VM_NAME_IP }} 'docker pull shuelzin/helloworld-page:latest && docker run -d -p 80:80 --restart=always --name ascan-helloworld shuelzin/helloworld-page:latest'
 
