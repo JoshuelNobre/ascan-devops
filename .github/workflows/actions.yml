@@ -71,9 +71,9 @@ jobs:
             sudo apt-get install -y docker-ce
           fi
         '
-    - name: Add user to docker group on VM
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.VM_NAME_IP }} 'sudo usermod -aG docker $USER'
+    # - name: Add user to docker group on VM
+    #   run: |
+    #     ssh -o StrictHostKeyChecking=no ${{ secrets.VM_NAME_IP }} 'sudo usermod -aG docker $USER'
 
     - name: Deploy to VM
       run: |
