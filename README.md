@@ -14,3 +14,5 @@ Este desafio foi desenvolvido com as seguintes tecnologias:
 -  [Terraform](https://developer.hashicorp.com/terraform/docs)
 -  [Azure Cloud](https://learn.microsoft.com/pt-br/azure/?product=popular)
 -  [Github Actions](https://github.com/features/actions)
+-  [Prometheus](https://prometheus.io/docs/introduction/overview/)
+-  [Grafana](https://grafana.com/docs/)
