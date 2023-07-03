@@ -17,7 +17,7 @@ Este desafio foi desenvolvido com as seguintes tecnologias:
 -  [Prometheus](https://prometheus.io/docs/introduction/overview/)
 -  [Grafana](https://grafana.com/docs/)
 
-## :technologist: Tecnologias
+## :computer: Projeto
 
 ![image](https://github.com/JoshuelNobre/ascan-devops/assets/73402934/e0030036-f67d-40e2-998e-12e6f01d8f55)
 ![image](https://github.com/JoshuelNobre/ascan-devops/assets/73402934/4299f674-8ac9-459f-b056-b9765b25cf06)
